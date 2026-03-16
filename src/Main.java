@@ -1,20 +1,58 @@
-public class PalindromeCheckerApp {
+import java.util.Scanner;
+
+class PalindromeService {
+
+    public boolean isPalindrome(String input) {
+
+        if (input == null) {
+            return false;
+        }
+
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            while (start < end && !Character.isLetterOrDigit(input.charAt(start))) {
+                start++;
+            }
+
+            while (start < end && !Character.isLetterOrDigit(input.charAt(end))) {
+                end--;
+            }
+
+            if (Character.toLowerCase(input.charAt(start)) !=
+                    Character.toLowerCase(input.charAt(end))) {
+                return false;
+            }
+
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+}
+
+class PalindromeCheckerApp {
 
     public static void main(String[] args) {
 
-        // Input string
-        String input = "A man a plan a canal Panama";
+        Scanner sc = new Scanner(System.in);
 
-        // Normalize the string: remove non-alphanumeric and convert to lowercase
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
 
-        boolean isPalindrome = true;
+        PalindromeService service = new PalindromeService();
 
-        // Compare characters from both ends
-        for (int i = 0; i < normalized.length() / 2; i++) {
+        boolean result = service.isPalindrome(input);
 
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
+        if (result) {
+            System.out.println("Is it a Palindrome? : true");
+        } else {
+            System.out.println("Is it a Palindrome? : false");
         }
+
+        sc.close();
+    }
+}
