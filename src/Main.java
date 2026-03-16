@@ -1,40 +1,69 @@
-import java.util.Scanner;
+/*
 
-class PalindromeCheckerApp{
+ * ============================================================
+ * MAIN CLASS – UseCase1PalindromeApp
+ * ============================================================
+ *
+ * Use Case 1: Application Entry & Welcome Message
+ *
+ * Description:
+ * This class represents the entry point of the
+ * Palindrome Checker Management System.
+ *
+ * At this stage, the application:
+ * - Starts execution from the main() method
+ * - Displays a welcome message
+ * - Shows application version
+ *
+ * No palindrome logic is implemented yet.
+ *
+ * The goal is to establish a clear startup flow.
+ *
+ * @author Developer
+ * @version 1.0
+
+
+public class UseCase1PalindromeCheckerApp {
+
+    /**
+     * Application entry point.
+     *
+     * This is the first method executed by the JVM
+     * when the program starts.
+     *
+     * @param args Command-line arguments
+
+    public static void main(String[] args) { ... }
+}
+
+ */
+import java.util.Stack;
+public class PalindromeCheckerApp {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to the Palindrome Checker Management System");
-        System.out.println("Version : 1.0");
+        // Declare and initialize the input string
+        String input = "noon";
 
-        System.out.print("Enter a string: ");
-        String input  = sc.nextLine();
+        // Create a Stack to store characters
+        Stack<Character> stack = new Stack<>();
 
-        String reversed = "";
+        // Push each character of the string into the stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
 
-
-        char[] chars = input.toCharArray();
-
-        int start = 0;
-        int end = chars.length - 1;
+        // Assume palindrome initially
         boolean isPalindrome = true;
 
-
-        while (start < end) {
-            if (chars[start] != chars[end]) {
+        // Iterate again through original string
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-
-        if (isPalindrome) {
-            System.out.println("Is it a Palindrome? : true");
-        } else {
-            System.out.println("Is it a Palindrome? : false");
-        }
-
-        sc.close();
+        // Display result
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
